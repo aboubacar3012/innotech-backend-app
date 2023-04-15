@@ -8,11 +8,11 @@ const stackSchema = new mongoose.Schema({
   duration: Number,
   //   numberOfBatches: Number,
   createdAt: {
-    type: Date,
+    type: String,
     default: new Date().toISOString(),
   },
   updatedAt: {
-    type: Date,
+    type: String,
     default: new Date().toISOString(),
   },
 });

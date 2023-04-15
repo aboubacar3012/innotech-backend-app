@@ -41,11 +41,11 @@ const batchSchema = new mongoose.Schema({
     default: "coming",
   },
   createdAt: {
-    type: Date,
+    type: String,
     default: new Date().toISOString(),
   },
-  createdAt: {
-    type: Date,
+  updatedAt: {
+    type: String,
     default: new Date().toISOString(),
   },
 });

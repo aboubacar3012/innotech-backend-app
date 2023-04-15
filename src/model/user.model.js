@@ -27,13 +27,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  gender: {
+    type: String,
+    default: "unknown",
+    enum: ["man", "woman", "unknown"],
+  },
   avatar: {
     type: String,
     default: "",
   },
   password: {
     type: String,
-    default: generator.generate({ length: 10, numbers: true }),
+    // default: generator.generate({ length: 10, numbers: true }),
   },
   batchList: [
     {
@@ -44,6 +49,19 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["admin", "student", "teacher"],
+    default: "student",
+  },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
+  createdAt: {
+    type: String,
+    default: new Date().toISOString(),
+  },
+  updatedAt: {
+    type: String,
+    default: new Date().toISOString(),
   },
 });
 
