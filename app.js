@@ -5,7 +5,6 @@ const logger = require("morgan");
 const middleware = require("./src/utils/middleware");
 const cors = require('cors')
 require("./src/model/dbConnection");
-const cors = require("cors");
 
 const usersRouter = require("./src/routes/user.routes");
 const stackRouter = require("./src/routes/stack.routes");
