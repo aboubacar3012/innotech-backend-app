@@ -29,7 +29,7 @@ router.get("/:id", (request, response) => {
 router.get("/", (request, response) => {
   try {
     User.find().then((users) => {
-      if (users.length > 0) return response.status(200).json(users);
+      if (users.length > 0) return response.status(200).json({success:true, users});
       else
         return response
           .status(200)

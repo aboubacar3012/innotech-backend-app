@@ -10,6 +10,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  intro: {
+    type: String,
+    default: "",
+  },
+  job: {
+    type: String,
+    default: "",
+  },
   email: {
     type: String,
     unique: true,
@@ -48,12 +56,24 @@ const userSchema = new mongoose.Schema({
   ],
   role: {
     type: String,
-    enum: ["admin", "student", "teacher"],
+    enum: ["admin", "student", "teacher", "assistant"],
     default: "student",
   },
   isActive: {
     type: Boolean,
     default: false,
+  },
+  level: {
+    type: Number,
+    default: 1,
+  },
+  country: {
+    type: String,
+    default: "",
+  },
+  city: {
+    type: String,
+    default: "",
   },
   createdAt: {
     type: String,

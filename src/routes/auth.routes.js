@@ -15,7 +15,7 @@ router.post("/signup", (request, response) => {
       if (user) {
         return response
           .status(200)
-          .json({ success: false, error: "Cet utilisateur exist deja" });
+          .json({ success: false, error: "Cet utilisateur exist deja, veillez vous connecter" });
       }
       // if not exist create new user
       else {
@@ -27,7 +27,7 @@ router.post("/signup", (request, response) => {
         newUser.save().then((user) => {
           return response.status(201).json({
             success: true,
-            message: "User created successfully",
+            message: "Inscription reussie avec success",
             user: user,
           });
         });
@@ -53,7 +53,33 @@ router.post("/signin", (request, response) => {
       else {
         return response
           .status(201)
-          .json({ success: false, message: "email or password incorrect" });
+          .json({ success: false, message: "votre email ou mot de passe est incorrect" });
+      }
+    });
+  } catch (e) {
+    return response.status(200).json({ success: false, error: e.message });
+  }
+});
+
+// Reset Password
+router.post("/resetpwd", (request, response) => {
+  try {
+    const { email, password, dateOfBirth } = request.body;
+    // check if user exist
+    User.findOne({ email: email, dateOfBirth:dateOfBirth }).then((user) => {
+      // if exist return user
+      if (user) {
+        const hashedPassword = bcrypt.hashSync(password, saltRounds);
+        user.password = hashedPassword;
+        user.save().then(() => {
+          return response.status(200).json({ success: true, message: "modification reussie avec success" });
+        })
+      }
+      // if not exist create new user
+      else {
+        return response
+          .status(200)
+          .json({ success: false, error: "votre adresse mail ou date de naissance est incorrect" });
       }
     });
   } catch (e) {
