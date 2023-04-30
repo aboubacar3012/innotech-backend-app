@@ -87,6 +87,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isAlreadyCalled: {
+    type: Boolean,
+    default: false,
+  },
   submitMessage: {
     type: String,
     default: "",
