@@ -29,7 +29,8 @@ router.get("/:id", (request, response) => {
 router.get("/", (request, response) => {
   try {
     User.find().then((users) => {
-      if (users.length > 0) return response.status(200).json({success:true, users});
+      if (users.length > 0)
+        return response.status(200).json({ success: true, users });
       else
         return response
           .status(200)
@@ -99,20 +100,22 @@ router.put("/:id", (request, response) => {
     const userId = request.params.id;
     // verifier si l'id est valid
     if (!mongoose.isValidObjectId(userId))
-      return response
-        .status(200)
-        .json({ success: false, message: "id is not valid" });
+      return response.status(200).json({
+        success: false,
+        message: "l'ID de cet utilisateur n'existe pas",
+      });
 
     User.findByIdAndUpdate(userId, { ...request.body }, { new: true }).then(
       (updated) => {
         if (updated)
-          return response
-            .status(200)
-            .json({ success: true, message: "user updated successfully" });
+          return response.status(200).json({
+            success: true,
+            message: "Mise a jour reussie avec success",
+          });
         else
           return response
             .status(200)
-            .json({ success: false, message: "user not found" });
+            .json({ success: false, message: "Utilisateur non trouvé" });
       }
     );
   } catch (e) {

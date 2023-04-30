@@ -75,6 +75,22 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  isLevelOnePayed: {
+    type: Boolean,
+    default: false,
+  },
+  isLevelTwoPayed: {
+    type: Boolean,
+    default: false,
+  },
+  isLevelThreePayed: {
+    type: Boolean,
+    default: false,
+  },
+  submitMessage: {
+    type: String,
+    default: "",
+  },
   createdAt: {
     type: String,
     default: new Date().toISOString(),
