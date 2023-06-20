@@ -65,7 +65,8 @@ const userSchema = new mongoose.Schema({
   },
   level: {
     type: Number,
-    default: 1,
+    enum: [0, 1, 2, 3],
+    default: 0,
   },
   country: {
     type: String,
