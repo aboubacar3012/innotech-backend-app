@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../model/user.model");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 // Registration
@@ -13,9 +13,10 @@ router.post("/signup", (request, response) => {
     User.findOne({ email: body.email }).then((user) => {
       // if exist return error message
       if (user) {
-        return response
-          .status(200)
-          .json({ success: false, error: "Cet utilisateur exist deja, veillez vous connecter" });
+        return response.status(200).json({
+          success: false,
+          error: "Cet utilisateur exist deja, veillez vous connecter",
+        });
       }
       // if not exist create new user
       else {
@@ -51,9 +52,10 @@ router.post("/signin", (request, response) => {
       }
       // if not exist create new user
       else {
-        return response
-          .status(201)
-          .json({ success: false, message: "votre email ou mot de passe est incorrect" });
+        return response.status(201).json({
+          success: false,
+          message: "votre email ou mot de passe est incorrect",
+        });
       }
     });
   } catch (e) {
@@ -66,20 +68,24 @@ router.post("/resetpwd", (request, response) => {
   try {
     const { email, password, dateOfBirth } = request.body;
     // check if user exist
-    User.findOne({ email: email, dateOfBirth:dateOfBirth }).then((user) => {
+    User.findOne({ email: email, dateOfBirth: dateOfBirth }).then((user) => {
       // if exist return user
       if (user) {
         const hashedPassword = bcrypt.hashSync(password, saltRounds);
         user.password = hashedPassword;
         user.save().then(() => {
-          return response.status(200).json({ success: true, message: "modification reussie avec success" });
-        })
+          return response.status(200).json({
+            success: true,
+            message: "modification reussie avec success",
+          });
+        });
       }
       // if not exist create new user
       else {
-        return response
-          .status(200)
-          .json({ success: false, error: "votre adresse mail ou date de naissance est incorrect" });
+        return response.status(200).json({
+          success: false,
+          error: "votre adresse mail ou date de naissance est incorrect",
+        });
       }
     });
   } catch (e) {
