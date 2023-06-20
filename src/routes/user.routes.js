@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../model/user.model");
 const mongoose = require("mongoose");
 
-// get user by id
+// get user by ID
 router.get("/:id", (request, response) => {
   try {
     const userId = request.params.id;
